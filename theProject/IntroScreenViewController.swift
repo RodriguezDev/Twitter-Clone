@@ -33,10 +33,10 @@ class IntroScreenViewController: UIViewController {
 
 extension UIButton {
     func applyDesign() {
-        self.backgroundColor = UIColor.darkGray.withAlphaComponent(0.1)
+        self.backgroundColor = UIColor.darkGray.withAlphaComponent(1)
         self.layer.borderWidth = 2
         self.layer.borderColor = UIColor.darkGray.cgColor
-        //self.layer.cornerRadius = self.frame.height / 2 // Rounds corners completely.
-        self.setTitleColor(UIColor.darkGray, for: .normal)
+        self.layer.cornerRadius = self.frame.height / 2 // Rounds corners completely.
+        self.setTitleColor(UIColor.white, for: .normal)
     }
 }
