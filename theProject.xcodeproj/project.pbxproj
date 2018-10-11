@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A1655F472154146C0001B98E /* IntroScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1655F462154146C0001B98E /* IntroScreenViewController.swift */; };
+		A1A14042216E846300B35DE6 /* PostListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A14041216E846300B35DE6 /* PostListViewController.swift */; };
+		A1A14044216E848600B35DE6 /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A14043216E848600B35DE6 /* CreatePostViewController.swift */; };
 		A1B2B1FC21543D40005A73B5 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2B1FB21543D40005A73B5 /* LogInViewController.swift */; };
 		A1B2B1FE21543D47005A73B5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2B1FD21543D47005A73B5 /* SignUpViewController.swift */; };
 		A1ED821A2151C9D700AA6DDB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ED82192151C9D700AA6DDB /* AppDelegate.swift */; };
@@ -24,6 +26,8 @@
 		7F1B1E9C264F4DB4B275494C /* Pods_theProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_theProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		954FAA25ABDF45F3E21C940C /* Pods-theProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-theProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-theProject/Pods-theProject.debug.xcconfig"; sourceTree = "<group>"; };
 		A1655F462154146C0001B98E /* IntroScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroScreenViewController.swift; sourceTree = "<group>"; };
+		A1A14041216E846300B35DE6 /* PostListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewController.swift; sourceTree = "<group>"; };
+		A1A14043216E848600B35DE6 /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
 		A1B2B1FB21543D40005A73B5 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		A1B2B1FD21543D47005A73B5 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		A1ED82162151C9D700AA6DDB /* theProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = theProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,6 +96,8 @@
 				A1B2B1FB21543D40005A73B5 /* LogInViewController.swift */,
 				A1B2B1FD21543D47005A73B5 /* SignUpViewController.swift */,
 				A1ED821D2151C9D700AA6DDB /* Main.storyboard */,
+				A1A14043216E848600B35DE6 /* CreatePostViewController.swift */,
+				A1A14041216E846300B35DE6 /* PostListViewController.swift */,
 				A1ED82202151C9D700AA6DDB /* Assets.xcassets */,
 				A1ED82222151C9D700AA6DDB /* LaunchScreen.storyboard */,
 				A1ED82252151C9D700AA6DDB /* Info.plist */,
@@ -221,9 +227,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1B2B1FC21543D40005A73B5 /* LogInViewController.swift in Sources */,
+				A1A14044216E848600B35DE6 /* CreatePostViewController.swift in Sources */,
 				A1ED821C2151C9D700AA6DDB /* ViewController.swift in Sources */,
 				A1ED821A2151C9D700AA6DDB /* AppDelegate.swift in Sources */,
 				A1655F472154146C0001B98E /* IntroScreenViewController.swift in Sources */,
+				A1A14042216E846300B35DE6 /* PostListViewController.swift in Sources */,
 				A1B2B1FE21543D47005A73B5 /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

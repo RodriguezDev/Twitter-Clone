@@ -112,7 +112,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" textContentType="email"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BGH-EI-rcv">
                                 <rect key="frame" x="24" y="304" width="327" height="30"/>
@@ -122,13 +122,10 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MNb-nF-UOM">
-                                <rect key="frame" x="87" y="550" width="200" height="53"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="sjT-eV-Mml"/>
-                                </constraints>
+                                <rect key="frame" x="123.5" y="550" width="127" height="53"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="30"/>
                                 <state key="normal" title="Continue"/>
                                 <connections>
@@ -160,7 +157,7 @@
                         <outlet property="continueButton" destination="MNb-nF-UOM" id="zJf-qu-PWH"/>
                         <outlet property="passwordTextField" destination="BGH-EI-rcv" id="ZlK-AW-2oy"/>
                         <outlet property="usernameTextField" destination="4Cw-VC-g9W" id="LNo-PA-kF0"/>
-                        <segue destination="q19-MO-YHd" kind="show" identifier="loggedIn" id="WYB-4W-ybS"/>
+                        <segue destination="MII-90-IR6" kind="show" identifier="loggedIn" id="LcE-xs-V63"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wcq-GV-2ny" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -203,7 +200,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" textContentType="password"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cmP-zV-XYg">
                                 <rect key="frame" x="16" y="44" width="218" height="82"/>
@@ -212,10 +209,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ap-TJ-I9X">
-                                <rect key="frame" x="87" y="550" width="200" height="53"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="Jt6-eN-Yqu"/>
-                                </constraints>
+                                <rect key="frame" x="123.5" y="550" width="127" height="53"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="30"/>
                                 <state key="normal" title="Continue"/>
                                 <connections>
@@ -251,36 +245,90 @@
                         <outlet property="emailTextField" destination="BcW-3L-ulR" id="FgQ-Hi-BZg"/>
                         <outlet property="passwordTextField" destination="khf-Sd-ugc" id="HUN-Ea-kYy"/>
                         <outlet property="usernameTextField" destination="SdD-53-H1R" id="NwF-gw-Vcw"/>
-                        <segue destination="q19-MO-YHd" kind="show" identifier="signedUp" id="eR3-Y5-ITv"/>
+                        <segue destination="MII-90-IR6" kind="show" identifier="signedUp" id="TrY-yM-5kY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9pe-hY-hMV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1204" y="585.1574212893554"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="Mh8-hL-cND">
+        <!--Post List View Controller-->
+        <scene sceneID="oJ5-4A-biy">
             <objects>
-                <viewController id="q19-MO-YHd" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="H6I-zC-s2s">
+                <viewController id="MII-90-IR6" customClass="PostListViewController" customModule="theProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1P3-fA-fgc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wow boi you made it." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6qa-Uf-Tmk">
-                                <rect key="frame" x="105" y="323" width="164" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kpV-jQ-I5E">
+                                <rect key="frame" x="329" y="20" width="30" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="+"/>
+                                <connections>
+                                    <segue destination="xFq-yH-f3Y" kind="show" identifier="toPostTweet" id="UkY-4u-9bu"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cDT-kC-79K">
+                                <rect key="frame" x="0.0" y="86" width="375" height="581"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="dCq-Rb-fFx"/>
+                        <constraints>
+                            <constraint firstItem="cDT-kC-79K" firstAttribute="leading" secondItem="Svl-pZ-D5X" secondAttribute="leading" id="BWs-A8-dkN"/>
+                            <constraint firstItem="cDT-kC-79K" firstAttribute="trailing" secondItem="Svl-pZ-D5X" secondAttribute="trailing" id="aNt-pM-kTh"/>
+                            <constraint firstItem="cDT-kC-79K" firstAttribute="top" secondItem="kpV-jQ-I5E" secondAttribute="bottom" constant="18" id="aws-z5-AAp"/>
+                            <constraint firstItem="Svl-pZ-D5X" firstAttribute="trailing" secondItem="kpV-jQ-I5E" secondAttribute="trailing" constant="16" id="nGx-JW-3mU"/>
+                            <constraint firstItem="cDT-kC-79K" firstAttribute="bottom" secondItem="Svl-pZ-D5X" secondAttribute="bottom" id="t7J-FG-jfc"/>
+                            <constraint firstItem="kpV-jQ-I5E" firstAttribute="top" secondItem="Svl-pZ-D5X" secondAttribute="top" id="vw5-Gb-Rg7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Svl-pZ-D5X"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5p1-Ef-p6J" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cah-4s-dhB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2049" y="195"/>
+            <point key="canvasLocation" x="2262" y="134"/>
+        </scene>
+        <!--Create Post View Controller-->
+        <scene sceneID="BsH-l6-5aD">
+            <objects>
+                <viewController id="xFq-yH-f3Y" customClass="CreatePostViewController" customModule="theProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sSm-V9-bGl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="What's on your mind?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6uK-TR-9xf">
+                                <rect key="frame" x="16" y="68" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0rj-uL-OTg">
+                                <rect key="frame" x="313" y="114" width="46" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="Post"/>
+                                <connections>
+                                    <action selector="submitPost:" destination="xFq-yH-f3Y" eventType="touchUpInside" id="adr-Xt-hUp"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="0rj-uL-OTg" firstAttribute="top" secondItem="6uK-TR-9xf" secondAttribute="bottom" constant="16" id="DgL-gz-XTD"/>
+                            <constraint firstItem="OPa-Qk-fxk" firstAttribute="trailing" secondItem="6uK-TR-9xf" secondAttribute="trailing" constant="16" id="I59-yf-ue0"/>
+                            <constraint firstItem="6uK-TR-9xf" firstAttribute="top" secondItem="OPa-Qk-fxk" secondAttribute="top" constant="48" id="RPL-hd-hcq"/>
+                            <constraint firstItem="OPa-Qk-fxk" firstAttribute="trailing" secondItem="0rj-uL-OTg" secondAttribute="trailing" constant="16" id="gwG-Hc-XsB"/>
+                            <constraint firstItem="6uK-TR-9xf" firstAttribute="leading" secondItem="OPa-Qk-fxk" secondAttribute="leading" constant="16" id="vY1-9t-nZu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="OPa-Qk-fxk"/>
+                    </view>
+                    <connections>
+                        <outlet property="postTextField" destination="6uK-TR-9xf" id="rms-ey-iH7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="srj-Qx-Pqc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3031" y="134"/>
         </scene>
     </scenes>
     <resources>
@@ -288,6 +336,6 @@
         <image name="logoPng" width="700" height="611"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eR3-Y5-ITv"/>
+        <segue reference="TrY-yM-5kY"/>
     </inferredMetricsTieBreakers>
 </document>

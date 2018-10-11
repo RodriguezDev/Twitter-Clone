@@ -40,3 +40,9 @@ extension UIButton {
         self.setTitleColor(UIColor.white, for: .normal)
     }
 }
+extension String
+{
+    func trim() -> String {
+        return self.trimmingCharacters(in: .whitespaces)
+    }
+}
