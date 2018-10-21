@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class IntroScreenViewController: UIViewController {
     
@@ -25,9 +26,21 @@ class IntroScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         logInButton.applyDesign()
         signUpButton.applyDesign()
+        
+        // Check if we have a logged in user.
+        Auth.auth().addStateDidChangeListener { auth, user in
+            if let user = user {
+                print("User \(user) logged in.")
+                self.performSegue(withIdentifier: "alreadyLoggedIn", sender: self)
+            } else {
+                print("No user logged in.")
+            }
+        }
     }
 }
 

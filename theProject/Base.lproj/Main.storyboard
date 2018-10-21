@@ -82,6 +82,7 @@
                         <outlet property="signUpButton" destination="nXG-wt-CHp" id="xcd-5U-VyR"/>
                         <segue destination="8pS-cY-Sbu" kind="show" identifier="toLogIn" id="69a-YO-BSM"/>
                         <segue destination="78g-cX-813" kind="show" identifier="toSignUp" id="xA5-3i-1AO"/>
+                        <segue destination="MII-90-IR6" kind="show" identifier="alreadyLoggedIn" id="RiJ-xA-zRS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -271,6 +272,63 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cDT-kC-79K">
                                 <rect key="frame" x="0.0" y="86" width="375" height="581"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="postCell" rowHeight="200" id="j50-hi-o96" customClass="PostListCell" customModule="theProject" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="200"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="j50-hi-o96" id="9BF-To-A54">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ro7-Vr-81g">
+                                                    <rect key="frame" x="15" y="16" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="X1U-CQ-Hpy"/>
+                                                        <constraint firstAttribute="height" constant="50" id="zp7-Xf-aF5"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YVs-AP-IXL">
+                                                    <rect key="frame" x="73" y="16" width="73.5" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@user" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ajZ-eK-8R2">
+                                                    <rect key="frame" x="151.5" y="16" width="43.5" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Post text." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CeM-20-PeT">
+                                                    <rect key="frame" x="73" y="39" width="65" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ro7-Vr-81g" firstAttribute="top" secondItem="9BF-To-A54" secondAttribute="topMargin" constant="5" id="2gl-vG-TAk"/>
+                                                <constraint firstItem="CeM-20-PeT" firstAttribute="leading" secondItem="ro7-Vr-81g" secondAttribute="trailing" constant="8" id="Ctg-o0-rce"/>
+                                                <constraint firstItem="CeM-20-PeT" firstAttribute="top" secondItem="YVs-AP-IXL" secondAttribute="bottom" constant="5" id="QAb-qJ-2EU"/>
+                                                <constraint firstItem="ajZ-eK-8R2" firstAttribute="top" secondItem="9BF-To-A54" secondAttribute="topMargin" constant="5" id="dz6-36-s0f"/>
+                                                <constraint firstItem="ro7-Vr-81g" firstAttribute="leading" secondItem="9BF-To-A54" secondAttribute="leadingMargin" id="gFz-yV-o6d"/>
+                                                <constraint firstItem="YVs-AP-IXL" firstAttribute="top" secondItem="9BF-To-A54" secondAttribute="topMargin" constant="5" id="oK0-pt-gPD"/>
+                                                <constraint firstItem="YVs-AP-IXL" firstAttribute="leading" secondItem="ro7-Vr-81g" secondAttribute="trailing" constant="8" id="pWN-qz-cjK"/>
+                                                <constraint firstItem="ajZ-eK-8R2" firstAttribute="leading" secondItem="YVs-AP-IXL" secondAttribute="trailing" constant="5" id="vzp-A0-7UN"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="postText" destination="CeM-20-PeT" id="o0M-ro-Ng0"/>
+                                            <outlet property="postUserDisplayName" destination="YVs-AP-IXL" id="5sZ-0W-D06"/>
+                                            <outlet property="postUserHandle" destination="ajZ-eK-8R2" id="GUx-Fd-Wl1"/>
+                                            <outlet property="postUserImage" destination="ro7-Vr-81g" id="xv9-a2-gFw"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="MII-90-IR6" id="mxv-yT-bqJ"/>
+                                    <outlet property="delegate" destination="MII-90-IR6" id="ni8-LQ-0jQ"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -284,10 +342,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Svl-pZ-D5X"/>
                     </view>
+                    <connections>
+                        <outlet property="postTable" destination="cDT-kC-79K" id="JUr-gL-dxx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cah-4s-dhB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2262" y="134"/>
+            <point key="canvasLocation" x="2261.5999999999999" y="133.5832083958021"/>
         </scene>
         <!--Create Post View Controller-->
         <scene sceneID="BsH-l6-5aD">
@@ -336,6 +397,6 @@
         <image name="logoPng" width="700" height="611"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TrY-yM-5kY"/>
+        <segue reference="RiJ-xA-zRS"/>
     </inferredMetricsTieBreakers>
 </document>
