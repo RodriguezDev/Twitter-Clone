@@ -32,6 +32,8 @@ class IntroScreenViewController: UIViewController {
         logInButton.applyDesign()
         signUpButton.applyDesign()
         
+        // try! Auth.auth().signOut()
+        
         // Check if we have a logged in user.
         Auth.auth().addStateDidChangeListener { auth, user in
             if let user = user {

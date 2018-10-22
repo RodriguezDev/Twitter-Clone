@@ -26,7 +26,7 @@ class Post {
         ref = newSnapshot.ref
         if let value = newSnapshot.value as? [String: Any] {
             text = value["postText"] as! String
-            userID = value["postUserID"] as! String
+            userID = value["postCreator"] as! String
             username = value["postUsername"] as! String
             // TODO: add likes
         }

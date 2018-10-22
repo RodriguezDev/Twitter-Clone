@@ -10,7 +10,7 @@ class PostListViewController: UIViewController, UITableViewDelegate, UITableView
     var refreshControl: UIRefreshControl!
     
     // MARK: Database variables
-    var posts = [String]()
+    var posts = [Post]()
     let postsRef = Database.database().reference().child("Posts")
     
     // MARK: Default functions
@@ -44,7 +44,8 @@ class PostListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: PostListCell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostListCell
-        cell.postText.text = posts[indexPath.row]
+        cell.postText.text = posts[indexPath.row].text
+        cell.postUserHandle.text = "@\(posts[indexPath.row].username)"
         cell.postUserImage.maskCircle(anyImage: UIImage(named: "defaultProfileImage.jpg")!)
         return cell
     }
@@ -56,11 +57,7 @@ class PostListViewController: UIViewController, UITableViewDelegate, UITableView
             
             for child in snapshot.children {
                 let childSnapshot = child as! DataSnapshot
-                
-                if let value = childSnapshot.value as? [String: Any] {
-                    let text = value["postText"] as! String
-                    self.posts.append(text)
-                }
+                self.posts.append(Post(newSnapshot: childSnapshot))
             }
             self.postTable.reloadData()
         })
@@ -73,10 +70,6 @@ extension UIImageView {
         self.layer.cornerRadius = self.frame.height / 2
         self.layer.masksToBounds = false
         self.clipsToBounds = true
-        
-        // make square(* must to make circle),
-        // resize(reduce the kilobyte) and
-        // fix rotation.
         self.image = anyImage
     }
 }
