@@ -1,11 +1,3 @@
-//
-//  PostListViewController.swift
-//  theProject
-//
-//  Created by Chris Rodriguez on 10/10/18.
-//  Copyright © 2018 Chris. All rights reserved.
-//
-
 import UIKit
 import Firebase
 
@@ -19,7 +11,7 @@ class PostListViewController: UIViewController, UITableViewDelegate, UITableView
     
     // MARK: Database variables
     var posts = [String]()
-    let postsRef = Database.database().reference().child("Post")
+    let postsRef = Database.database().reference().child("Posts")
     
     // MARK: Default functions
     override func viewDidLoad() {

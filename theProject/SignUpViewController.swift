@@ -15,10 +15,17 @@ class SignUpViewController: UIViewController {
         // Success -> segue
         // TODO: integrate username, add error messages / warnings
         
-        if emailTextField.text != nil && passwordTextField.text != nil {
+        if emailTextField.text != nil && passwordTextField.text != nil && usernameTextField.text != nil {
             Auth.auth().createUser(withEmail: emailTextField.text!.trim(), password: passwordTextField.text!) { (authResult, error) in
                 if error == nil {
                     print("User (\(self.emailTextField.text!)) created.")
+                    
+                    // Add username
+                    // TODO: check if the username is already taken
+                    let ref: DatabaseReference = Database.database().reference()
+                    let user = Auth.auth().currentUser!
+                    ref.child("users").child(user.uid).setValue(["username": self.usernameTextField.text!])
+                    
                     self.performSegue(withIdentifier: "signedUp", sender: nil)
                 } else {
                     print(error!.localizedDescription)

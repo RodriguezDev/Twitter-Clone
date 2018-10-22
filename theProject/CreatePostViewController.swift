@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class CreatePostViewController: UIViewController {
     
@@ -30,6 +31,8 @@ class CreatePostViewController: UIViewController {
         if (postTextField.text?.isEmpty)! {
             print("Error: post must have text.")
         } else {
+            let post = Post(newNext: postTextField.text!)
+            post.submit()
             dismiss(animated: true, completion: nil)
         }
     }
