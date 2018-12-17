@@ -14,7 +14,7 @@ class Post {
     var likes: Int = 0
     var userID: String = ""
     var username: String = ""
-    //var dateTime: Date = Date()
+    var dateTime: Date = Date()
     
     let ref: DatabaseReference!
     
@@ -22,15 +22,16 @@ class Post {
         text = newNext
         ref = Database.database().reference().child("Posts").childByAutoId()
         userID = Auth.auth().currentUser!.uid
+        dateTime = Date()
     }
-    init (newSnapshot: DataSnapshot) {
+    init(newSnapshot: DataSnapshot) {
         ref = newSnapshot.ref
         if let value = newSnapshot.value as? [String: Any] {
             text = value["postText"] as! String
-            //likes = value["likes"] as! Int
+            likes = value["likes"] as! Int
             userID = value["postCreator"] as! String
             username = value["postUsername"] as! String
-            //dateTime = value["dateTime"] as! Date
+            dateTime = Date(timeIntervalSinceReferenceDate: value["dateTime"] as! Double)
         }
     }
     
@@ -50,8 +51,10 @@ class Post {
     func buildDictionary() -> [String: Any] {
         return [
             "postText": text,
+            "likes": likes,
             "postCreator": userID,
-            "postUsername": username
+            "postUsername": username,
+            "dateTime": dateTime.timeIntervalSinceReferenceDate
         ]
     }
 }

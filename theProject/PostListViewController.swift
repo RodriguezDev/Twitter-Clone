@@ -52,13 +52,15 @@ class PostListViewController: UIViewController, UITableViewDelegate, UITableView
     
     // MARK: My functions. Yay.
     func getPostsAndRefresh() {
-        postsRef.observe(.value, with: { (snapshot) in
+        let query = postsRef.queryOrdered(byChild: "dateTime").queryLimited(toLast: 10)
+        query.observe(.value, with: { (snapshot) in
             self.posts.removeAll()
             
             for child in snapshot.children {
                 let childSnapshot = child as! DataSnapshot
                 self.posts.append(Post(newSnapshot: childSnapshot))
             }
+            self.posts.reverse() // Good design?
             self.postTable.reloadData()
         })
     }
