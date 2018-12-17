@@ -14,6 +14,7 @@ class Post {
     var likes: Int = 0
     var userID: String = ""
     var username: String = ""
+    //var dateTime: Date = Date()
     
     let ref: DatabaseReference!
     
@@ -26,9 +27,10 @@ class Post {
         ref = newSnapshot.ref
         if let value = newSnapshot.value as? [String: Any] {
             text = value["postText"] as! String
+            //likes = value["likes"] as! Int
             userID = value["postCreator"] as! String
             username = value["postUsername"] as! String
-            // TODO: add likes
+            //dateTime = value["dateTime"] as! Date
         }
     }
     
