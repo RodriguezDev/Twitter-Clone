@@ -13,5 +13,6 @@ class PostListCell: UITableViewCell {
     @IBOutlet weak var postUserImage: UIImageView!
     @IBOutlet weak var postUserDisplayName: UILabel!
     @IBOutlet weak var postUserHandle: UILabel!
+    @IBOutlet weak var postDate: UILabel!
     @IBOutlet weak var postText: UILabel!
 }

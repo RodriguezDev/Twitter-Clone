@@ -47,6 +47,12 @@ class PostListViewController: UIViewController, UITableViewDelegate, UITableView
         cell.postText.text = posts[indexPath.row].text
         cell.postUserHandle.text = "@\(posts[indexPath.row].username)"
         cell.postUserImage.maskCircle(anyImage: UIImage(named: "defaultProfileImage.jpg")!)
+        
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        formatter.dateStyle = .none
+        cell.postDate.text = "| " + formatter.string(from: posts[indexPath.row].dateTime)
+        
         return cell
     }
     
@@ -60,7 +66,8 @@ class PostListViewController: UIViewController, UITableViewDelegate, UITableView
                 let childSnapshot = child as! DataSnapshot
                 self.posts.append(Post(newSnapshot: childSnapshot))
             }
-            self.posts.reverse() // Good design?
+            self.posts.reverse() // Good design? Probably not.
+            print(self.posts.count)
             self.postTable.reloadData()
         })
     }
