@@ -12,14 +12,13 @@ import Firebase
 class IntroScreenViewController: UIViewController {
     
     // MARK: Outlets
-    @IBOutlet weak var logInButton: UIButton! // roundButton!
+    @IBOutlet weak var logInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
     
     // MARK: Actions
     @IBAction func logInButtonTapped(_ sender: Any) {
         performSegue(withIdentifier: "toLogIn", sender: self)
     }
-    
     @IBAction func signInButtonTapped(_ sender: Any) {
         performSegue(withIdentifier: "toSignUp", sender: self)
     }
@@ -27,13 +26,11 @@ class IntroScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
     override func viewDidAppear(_ animated: Bool) {
         logInButton.applyDesign()
         signUpButton.applyDesign()
         
-        // Force a logout 
-        //try! Auth.auth().signOut()
+        //try! Auth.auth().signOut() // Force a logout.
         
         // Check if we have a logged in user.
         Auth.auth().addStateDidChangeListener { auth, user in
@@ -49,15 +46,18 @@ class IntroScreenViewController: UIViewController {
 
 extension UIButton {
     func applyDesign() {
-        self.backgroundColor = UIColor.darkGray.withAlphaComponent(1)
-        self.layer.borderWidth = 2
+        //self.backgroundColor = UIColor.darkGray.withAlphaComponent(1)
+        self.layer.borderWidth = 1
         self.layer.borderColor = UIColor.darkGray.cgColor
+        self.layer.cornerRadius = self.frame.height / 6 // Rounds corners completely.
+        self.setTitleColor(UIColor.darkGray, for: .normal)
+    }
+    func roundButton() {
         self.layer.cornerRadius = self.frame.height / 2 // Rounds corners completely.
-        self.setTitleColor(UIColor.white, for: .normal)
+        self.clipsToBounds = true
     }
 }
-extension String
-{
+extension String{
     func trim() -> String {
         return self.trimmingCharacters(in: .whitespaces)
     }

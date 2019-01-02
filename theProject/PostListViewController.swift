@@ -22,7 +22,8 @@ class PostListViewController: UIViewController, UITableViewDelegate, UITableView
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         postTable.addSubview(refreshControl)
         
-        postTable.rowHeight = 80.0     // TODO: Make this dynamic. 80 is a good min though (until reactions get added)
+        postTable.rowHeight = UITableViewAutomaticDimension
+        postTable.estimatedRowHeight = 80
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -44,8 +45,19 @@ class PostListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: PostListCell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostListCell
+        
+        // Get username & display name
+        Database.database().reference().child("users").child(posts[indexPath.row].userID).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            
+            cell.postUserDisplayName.text = value!["displayName"] as? String
+            cell.postUserHandle.text = "@\(value!["username"] as! String)"
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+        cell.postText.numberOfLines = 0
         cell.postText.text = posts[indexPath.row].text
-        cell.postUserHandle.text = "@\(posts[indexPath.row].username)"
         cell.postUserImage.maskCircle(anyImage: UIImage(named: "defaultProfileImage.jpg")!)
         
         let formatter = DateFormatter()
@@ -58,7 +70,8 @@ class PostListViewController: UIViewController, UITableViewDelegate, UITableView
     
     // MARK: My functions. Yay.
     func getPostsAndRefresh() {
-        let query = postsRef.queryOrdered(byChild: "dateTime").queryLimited(toLast: 10)
+        let query = postsRef.queryOrdered(byChild: "dateTime").queryLimited(toLast: 25)
+        
         query.observe(.value, with: { (snapshot) in
             self.posts.removeAll()
             
@@ -67,7 +80,7 @@ class PostListViewController: UIViewController, UITableViewDelegate, UITableView
                 self.posts.append(Post(newSnapshot: childSnapshot))
             }
             self.posts.reverse() // Good design? Probably not.
-            print(self.posts.count)
+            print("Posts retrieved: \(self.posts.count)")
             self.postTable.reloadData()
         })
     }

@@ -13,7 +13,6 @@ class Post {
     var text: String = ""
     var likes: Int = 0
     var userID: String = ""
-    var username: String = ""
     var dateTime: Date = Date()
     
     let ref: DatabaseReference!
@@ -30,22 +29,12 @@ class Post {
             text = value["postText"] as! String
             likes = value["likes"] as! Int
             userID = value["postCreator"] as! String
-            username = value["postUsername"] as! String
             dateTime = Date(timeIntervalSinceReferenceDate: value["dateTime"] as! Double)
         }
     }
     
     func submit() {
-        let genRef = Database.database().reference()
-        // Get the username from the user table.
-        genRef.child("users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            self.username = value!["username"] as! String
-            
-            self.ref.setValue(self.buildDictionary())
-        }) { (error) in
-            print(error.localizedDescription)
-        }
+        self.ref.setValue(self.buildDictionary())
     }
     
     func buildDictionary() -> [String: Any] {
@@ -53,7 +42,6 @@ class Post {
             "postText": text,
             "likes": likes,
             "postCreator": userID,
-            "postUsername": username,
             "dateTime": dateTime.timeIntervalSinceReferenceDate
         ]
     }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A1655F472154146C0001B98E /* IntroScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1655F462154146C0001B98E /* IntroScreenViewController.swift */; };
+		A1943D2421D74C3C00B839F3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1943D2321D74C3C00B839F3 /* ProfileViewController.swift */; };
 		A19AF0FA217C5E4900A433F3 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19AF0F9217C5E4900A433F3 /* Post.swift */; };
 		A1A14042216E846300B35DE6 /* PostListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A14041216E846300B35DE6 /* PostListViewController.swift */; };
 		A1A14044216E848600B35DE6 /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A14043216E848600B35DE6 /* CreatePostViewController.swift */; };
@@ -28,6 +29,7 @@
 		7F1B1E9C264F4DB4B275494C /* Pods_theProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_theProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		954FAA25ABDF45F3E21C940C /* Pods-theProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-theProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-theProject/Pods-theProject.debug.xcconfig"; sourceTree = "<group>"; };
 		A1655F462154146C0001B98E /* IntroScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroScreenViewController.swift; sourceTree = "<group>"; };
+		A1943D2321D74C3C00B839F3 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A19AF0F9217C5E4900A433F3 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		A1A14041216E846300B35DE6 /* PostListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewController.swift; sourceTree = "<group>"; };
 		A1A14043216E848600B35DE6 /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				A1A14041216E846300B35DE6 /* PostListViewController.swift */,
 				A1B4DDAA217C577600EAA3FC /* PostListCell.swift */,
 				A1A14043216E848600B35DE6 /* CreatePostViewController.swift */,
+				A1943D2321D74C3C00B839F3 /* ProfileViewController.swift */,
 				A1ED821D2151C9D700AA6DDB /* Main.storyboard */,
 				A1ED82202151C9D700AA6DDB /* Assets.xcassets */,
 				A1ED82222151C9D700AA6DDB /* LaunchScreen.storyboard */,
@@ -234,6 +237,7 @@
 			files = (
 				A1B2B1FC21543D40005A73B5 /* LogInViewController.swift in Sources */,
 				A1A14044216E848600B35DE6 /* CreatePostViewController.swift in Sources */,
+				A1943D2421D74C3C00B839F3 /* ProfileViewController.swift in Sources */,
 				A1ED821C2151C9D700AA6DDB /* ViewController.swift in Sources */,
 				A1ED821A2151C9D700AA6DDB /* AppDelegate.swift in Sources */,
 				A1655F472154146C0001B98E /* IntroScreenViewController.swift in Sources */,

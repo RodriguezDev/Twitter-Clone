@@ -32,6 +32,19 @@ class LogInViewController: UIViewController {
         usernameTextField.setBottomBorder()
         passwordTextField.setBottomBorder()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // Check if user is already logged in.
+        
+        Auth.auth().addStateDidChangeListener { auth, user in
+            if let user = user {
+                print("User \(user.uid) logged in.")
+                self.performSegue(withIdentifier: "loggedIn", sender: self)
+            } else {
+                print("No user logged in.")
+            }
+        }
+    }
 }
 
 extension UITextField

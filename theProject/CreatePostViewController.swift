@@ -13,10 +13,11 @@ class CreatePostViewController: UIViewController, UITextViewDelegate {
     
     // MARK: Outlets
     @IBOutlet weak var postTextView: UITextView!
+    @IBOutlet weak var wordCountLabel: UILabel!
+    @IBOutlet weak var postButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         postTextView.delegate = self
         
         postTextView.text = "What's happening?"
@@ -26,6 +27,18 @@ class CreatePostViewController: UIViewController, UITextViewDelegate {
         if textView.textColor == UIColor.lightGray {
             textView.text = nil
             textView.textColor = UIColor.black
+        }
+    }
+    func textViewDidChange(_ textView: UITextView) {
+        let letterCount = textView.text.count
+        wordCountLabel.text =  "\(letterCount)/140"
+        
+        if letterCount > 140 {
+            wordCountLabel.textColor = UIColor.red
+            postButton.isEnabled = false
+        } else {
+            wordCountLabel.textColor = UIColor.black
+            postButton.isEnabled = true
         }
     }
     func textViewDidEndEditing(_ textView: UITextView) {
