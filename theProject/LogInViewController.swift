@@ -1,36 +1,34 @@
 import UIKit
 import Firebase
 
-class LogInViewController: UIViewController {
+class LogInViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Outlets
     @IBOutlet weak var continueButton: UIButton!
-    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var backgroundImage: UIImageView!
+    @IBOutlet weak var errorLabel: UILabel!
     
     // MARK: Actions
-    @IBAction func continueButtonTapped(_ sender: Any) {
-        // Attempts user log in using email & password.
-        // Success -> segue
-        
-        if usernameTextField.text != nil && passwordTextField.text != nil {
-            Auth.auth().signIn(withEmail: usernameTextField.text!.trim(), password: passwordTextField.text!, completion: { (authResult, error) in
-                if error == nil {
-                    print("Logged in: (\(self.usernameTextField.text!))")
-                    self.performSegue(withIdentifier: "loggedIn", sender: nil)
-                } else {
-                    print(error!.localizedDescription)
-                }
-            })
-        }
+    @IBAction func loginButtonTapped(_ sender: Any) {
+        attemptLogin()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.emailTextField.delegate = self
+        self.passwordTextField.delegate = self
+        
         continueButton.applyDesign()
-        usernameTextField.setBottomBorder()
+        emailTextField.setBottomBorder()
         passwordTextField.setBottomBorder()
+        
+        self.backgroundImage.image = UIImage(named: "escheresque.png")!.resizableImage(withCapInsets: .zero)    // Repeat image.
+        self.errorLabel.text = " "
+        self.errorLabel.numberOfLines = 0
+        self.passwordTextField.returnKeyType = UIReturnKeyType.go
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,21 +43,32 @@ class LogInViewController: UIViewController {
             }
         }
     }
-}
-
-extension UITextField
-{
-    func setBottomBorder()
-    {
-        self.borderStyle = UITextBorderStyle.none;
-        let border = CALayer()
-        let width = CGFloat(1.0)
-        border.borderColor = UIColor.darkGray.cgColor
-        border.frame = CGRect(x: 0, y: self.frame.size.height - width,   width:  self.frame.size.width, height: self.frame.size.height)
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // If the user taps enter, attempt login and resign keyboard.
         
-        border.borderWidth = width
-        self.layer.addSublayer(border)
-        self.layer.masksToBounds = true
+        textField.resignFirstResponder()
+        attemptLogin()
+        return true
     }
     
+    func attemptLogin() {
+        // Attempts user log in using email & password.
+        // Success -> segue
+        
+        if let usernameText = emailTextField.text, !usernameText.isEmpty, let passText = passwordTextField.text, !passText.isEmpty {
+            self.continueButton.loadingIndicator(true);
+            
+            Auth.auth().signIn(withEmail: usernameText.trim(), password: passText, completion: { (authResult, error) in
+                if error == nil {
+                    print("Logged in: (\(self.emailTextField.text!))")
+                    self.performSegue(withIdentifier: "loggedIn", sender: nil)
+                } else {
+                    self.errorLabel.text = (error!.localizedDescription)
+                    self.continueButton.loadingIndicator(false);
+                }
+            })
+        } else {
+            self.errorLabel.text = "Please enter required fields."
+        }
+    }
 }
