@@ -18,6 +18,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        try! Auth.auth().signOut()
+        
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self
         
