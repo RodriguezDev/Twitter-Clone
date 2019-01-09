@@ -1,6 +1,8 @@
 import UIKit
 import Firebase
 
+let NUM_OF_POSTS: UInt = 25
+
 class PostListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     // MARK: Outlets
@@ -70,7 +72,7 @@ class PostListViewController: UIViewController, UITableViewDelegate, UITableView
     
     // MARK: My functions. Yay.
     func getPostsAndRefresh() {
-        let query = postsRef.queryOrdered(byChild: "dateTime").queryLimited(toLast: 25)
+        let query = postsRef.queryOrdered(byChild: "dateTime").queryLimited(toLast: NUM_OF_POSTS) // Get 25 most recent posts.
         
         query.observe(.value, with: { (snapshot) in
             self.posts.removeAll()

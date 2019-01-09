@@ -18,7 +18,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        try! Auth.auth().signOut()
+        // try! Auth.auth().signOut() // Force a logout. ONLY for debug.
         
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self

@@ -22,6 +22,7 @@ class CreatePostViewController: UIViewController, UITextViewDelegate {
         
         postTextView.text = "What's happening?"
         postTextView.textColor = UIColor.lightGray
+        postButton.isEnabled = false
     }
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.lightGray {
@@ -35,6 +36,9 @@ class CreatePostViewController: UIViewController, UITextViewDelegate {
         
         if letterCount > 140 {
             wordCountLabel.textColor = UIColor.red
+            postButton.isEnabled = false
+        } else if textView.text.trim().count == 0 {
+            wordCountLabel.textColor = UIColor.black
             postButton.isEnabled = false
         } else {
             wordCountLabel.textColor = UIColor.black
