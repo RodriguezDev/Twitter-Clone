@@ -29,7 +29,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             
             self.continueButton.loadingIndicator(true)
             
-            // Check if username is already in use.
+            // TODO: Check if username is already in use.
             
             Auth.auth().createUser(withEmail: emailText.trim(), password: passText) { (authResult, error) in
                 if error == nil {
@@ -46,6 +46,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                     self.errorLabel.text = error!.localizedDescription
                 }
             }
+        } else {
+            self.errorLabel.text = "Please enter required fields."
         }
     }
     

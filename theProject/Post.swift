@@ -32,7 +32,6 @@ class Post {
             dateTime = Date(timeIntervalSinceReferenceDate: value["dateTime"] as! Double)
         }
     }
-    
     func submit() {
         self.ref.setValue(self.buildDictionary())
     }
@@ -44,5 +43,27 @@ class Post {
             "postCreator": userID,
             "dateTime": dateTime.timeIntervalSinceReferenceDate
         ]
+    }
+    func dateFormat() -> String {
+        // Takes the date and presents it in a meaningful way based on current date.
+        var result: String
+        let difference = Date().timeIntervalSinceReferenceDate - dateTime.timeIntervalSinceReferenceDate
+        
+        if difference < 60 {
+            result = "\(Int(difference))s"
+        } else if difference < 3600 {
+            result = "\(Int(difference / 60))m"
+        } else if difference < 86400 {
+            result = "\(Int(difference / 3600))h"
+        } else if difference < 86400 * 7 {
+            result = "\(Int(difference / 3600 * 7))d"
+        } else {
+            let formatter = DateFormatter()
+            formatter.timeStyle = .none
+            formatter.dateStyle = .short
+            result = formatter.string(from: dateTime)   // Just print the date.
+        }
+        
+        return result
     }
 }

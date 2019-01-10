@@ -65,7 +65,8 @@ class PostListViewController: UIViewController, UITableViewDelegate, UITableView
         let formatter = DateFormatter()
         formatter.timeStyle = .short
         formatter.dateStyle = .none
-        cell.postDate.text = "| " + formatter.string(from: posts[indexPath.row].dateTime)
+        
+        cell.postDate.text = "| " + posts[indexPath.row].dateFormat()
         
         return cell
     }
