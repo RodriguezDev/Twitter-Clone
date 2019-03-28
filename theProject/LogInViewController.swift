@@ -32,8 +32,15 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         self.errorLabel.numberOfLines = 0
         self.passwordTextField.returnKeyType = UIReturnKeyType.go
         
-        //NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
-        //NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -41,7 +48,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         
         Auth.auth().addStateDidChangeListener { auth, user in
             if let user = user {
-                print("User \(user.uid) logged in.")
+                print("User \(user.email!) logged in.")
                 self.performSegue(withIdentifier: "loggedIn", sender: self)
             } else {
                 print("No user logged in.")
@@ -54,6 +61,17 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         textField.resignFirstResponder()
         attemptLogin()
         return true
+    }
+    
+    @objc func keyboardWillChange(notification: Notification) {
+        guard let keyboardRect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        if notification.name == Notification.Name.UIKeyboardWillShow || notification.name == Notification.Name.UIKeyboardWillChangeFrame {
+            view.frame.origin.y = -keyboardRect.height
+        } else {
+            view.frame.origin.y = 0
+        }
     }
     
     func attemptLogin() {
@@ -76,21 +94,4 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             self.errorLabel.text = "Please enter required fields."
         }
     }
-    /*
-    @objc func keyboardWillShow(notification:NSNotification){
-        var userInfo = notification.userInfo!
-        var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
-        
-        var contentInset:UIEdgeInsets = self.ui_scrollView.contentInset
-        contentInset.bottom = keyboardFrame.size.height
-        ui_scrollView.contentInset = contentInset
-    }
-    
-    @objc func keyboardWillHide(notification:NSNotification){
-        
-        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
-        ui_scrollView.contentInset = contentInset
-    }
-     */
 }

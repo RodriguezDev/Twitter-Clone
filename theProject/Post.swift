@@ -12,7 +12,7 @@ import Firebase
 class Post {
     var text: String = ""
     var likes: Int = 0
-    var userID: String = ""
+    var creatorUserID: String = ""
     var dateTime: Date = Date()
     
     let ref: DatabaseReference!
@@ -20,7 +20,7 @@ class Post {
     init(newNext: String) {
         text = newNext
         ref = Database.database().reference().child("Posts").childByAutoId()
-        userID = Auth.auth().currentUser!.uid
+        creatorUserID = Auth.auth().currentUser!.uid
         dateTime = Date()
     }
     init(newSnapshot: DataSnapshot) {
@@ -28,7 +28,7 @@ class Post {
         if let value = newSnapshot.value as? [String: Any] {
             text = value["postText"] as! String
             likes = value["likes"] as! Int
-            userID = value["postCreator"] as! String
+            creatorUserID = value["postCreator"] as! String
             dateTime = Date(timeIntervalSinceReferenceDate: value["dateTime"] as! Double)
         }
     }
@@ -40,7 +40,7 @@ class Post {
         return [
             "postText": text,
             "likes": likes,
-            "postCreator": userID,
+            "postCreator": creatorUserID,
             "dateTime": dateTime.timeIntervalSinceReferenceDate
         ]
     }
@@ -56,7 +56,7 @@ class Post {
         } else if difference < 86400 {
             result = "\(Int(difference / 3600))h"
         } else if difference < 86400 * 7 {
-            result = "\(Int(difference / 3600 * 7))d"
+            result = "\(Int(difference / 86400))d"
         } else {
             let formatter = DateFormatter()
             formatter.timeStyle = .none

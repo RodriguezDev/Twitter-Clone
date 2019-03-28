@@ -559,11 +559,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="99.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="h0O-6u-eyD">
-                                                    <rect key="frame" x="73" y="11" width="282" height="73"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="h0O-6u-eyD">
+                                                    <rect key="frame" x="73" y="11" width="282" height="78"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="oRI-V0-IiI">
-                                                            <rect key="frame" x="0.0" y="0.0" width="282" height="18"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="165.66666666666666" height="18"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lgj-5l-eLx">
                                                                     <rect key="frame" x="0.0" y="0.0" width="73.333333333333329" height="18"/>
@@ -578,19 +578,24 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="| date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cUD-UI-2mH">
-                                                                    <rect key="frame" x="126.66666666666664" y="0.0" width="155.33333333333337" height="18"/>
+                                                                    <rect key="frame" x="126.66666666666666" y="0.0" width="39" height="18"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Post text." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rg3-kt-P2I">
-                                                            <rect key="frame" x="0.0" y="23" width="282" height="50"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Post text." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rg3-kt-P2I">
+                                                            <rect key="frame" x="0.0" y="22" width="65" height="25"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddV-Kd-3M4">
+                                                            <rect key="frame" x="0.0" y="51" width="30" height="27"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <state key="normal" title="Like"/>
+                                                        </button>
                                                     </subviews>
                                                 </stackView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NYI-Hm-sey">
@@ -602,7 +607,7 @@
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="h0O-6u-eyD" secondAttribute="bottom" constant="5" id="QSO-px-e9q"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="h0O-6u-eyD" secondAttribute="bottom" id="QSO-px-e9q"/>
                                                 <constraint firstItem="h0O-6u-eyD" firstAttribute="leading" secondItem="NYI-Hm-sey" secondAttribute="trailing" constant="8" id="VMZ-vs-27s"/>
                                                 <constraint firstItem="NYI-Hm-sey" firstAttribute="top" secondItem="UnD-Dz-04u" secondAttribute="topMargin" id="WN1-be-FlY"/>
                                                 <constraint firstItem="h0O-6u-eyD" firstAttribute="top" secondItem="UnD-Dz-04u" secondAttribute="topMargin" id="Y2Q-5R-gc3"/>
@@ -611,6 +616,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="likeButton" destination="ddV-Kd-3M4" id="OzI-Ys-mM7"/>
                                             <outlet property="postDate" destination="cUD-UI-2mH" id="Bzc-Nh-Xy1"/>
                                             <outlet property="postText" destination="Rg3-kt-P2I" id="bLH-fa-THf"/>
                                             <outlet property="postUserDisplayName" destination="Lgj-5l-eLx" id="JFE-W4-5j7"/>
@@ -697,8 +703,8 @@
         <image name="user_male" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VEI-k7-wY9"/>
-        <segue reference="7Ck-Nc-mQm"/>
-        <segue reference="5M9-5z-l97"/>
+        <segue reference="AeA-mu-3K2"/>
+        <segue reference="6XN-Rg-84p"/>
+        <segue reference="wOp-37-WCq"/>
     </inferredMetricsTieBreakers>
 </document>

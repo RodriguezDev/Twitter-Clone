@@ -15,4 +15,5 @@ class PostListCell: UITableViewCell {
     @IBOutlet weak var postUserHandle: UILabel!
     @IBOutlet weak var postDate: UILabel!
     @IBOutlet weak var postText: UILabel!
+    @IBOutlet weak var likeButton: UIButton!
 }

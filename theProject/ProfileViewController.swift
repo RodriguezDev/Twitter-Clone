@@ -9,7 +9,9 @@
 import UIKit
 import Firebase
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UIGestureRecognizerDelegate {
+    
+    let imagePicker = UIImagePickerController()
 
     @IBOutlet weak var profileImage: UIImageView!
     
@@ -35,6 +37,33 @@ class ProfileViewController: UIViewController {
         }) { (error) in
             print(error.localizedDescription)
         }
+        
+        let UITapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ProfileViewController.tappedImage(sender:)))
+        UITapRecognizer.delegate = self
+        self.profileImage.addGestureRecognizer(UITapRecognizer)
+        self.profileImage.isUserInteractionEnabled = true
+    }
+    
+    @objc func tappedImage(sender: UITapGestureRecognizer) {
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        // TODO: this.
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            self.profileImage.image = image
+        } else{
+            print("Something went wrong in  image")
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func editDisplayName(_ sender: Any) {

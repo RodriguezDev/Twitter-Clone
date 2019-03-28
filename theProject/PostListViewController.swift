@@ -20,7 +20,7 @@ class PostListViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         
         refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        //refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         postTable.addSubview(refreshControl)
         
@@ -49,7 +49,7 @@ class PostListViewController: UIViewController, UITableViewDelegate, UITableView
         let cell: PostListCell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostListCell
         
         // Get username & display name
-        Database.database().reference().child("users").child(posts[indexPath.row].userID).observeSingleEvent(of: .value, with: { (snapshot) in
+        Database.database().reference().child("users").child(posts[indexPath.row].creatorUserID).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             
             cell.postUserDisplayName.text = value!["displayName"] as? String
@@ -61,12 +61,8 @@ class PostListViewController: UIViewController, UITableViewDelegate, UITableView
         cell.postText.numberOfLines = 0
         cell.postText.text = posts[indexPath.row].text
         cell.postUserImage.maskCircle(anyImage: UIImage(named: "defaultProfileImage.jpg")!)
-        
-        let formatter = DateFormatter()
-        formatter.timeStyle = .short
-        formatter.dateStyle = .none
-        
         cell.postDate.text = "| " + posts[indexPath.row].dateFormat()
+        // cell.likeButton.imageView?.contentMode = 1
         
         return cell
     }
