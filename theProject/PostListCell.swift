@@ -12,17 +12,19 @@ import Firebase
 class PostListCell: UITableViewCell {
     
     var post:Post!
+    let tapRec = UITapGestureRecognizer()
     
     @IBOutlet weak var postUserImage: UIImageView!
     @IBOutlet weak var postUserDisplayName: UILabel!
     @IBOutlet weak var postUserHandle: UILabel!
     @IBOutlet weak var postDate: UILabel!
     @IBOutlet weak var postText: UILabel!
-    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var likeCount: UILabel!
+    @IBOutlet weak var likeButtonOutlet: UIButton!
     
     @IBAction func likeButtonTapped(_ sender: Any) {
         post.ref.child("likes").setValue(post.likes + 1)
-        likeButton.setTitle(String(post.likes + 1) + " likes", for: .normal)
+        likeCount.text = String(post.likes + 1)
     }
     
     func downloadProfileImage(name: String) {
@@ -30,10 +32,10 @@ class PostListCell: UITableViewCell {
         let imageRef = storageRef.child("profileImages/\(name)")
         
         imageRef.getData(maxSize: 3 * 1024 * 1024) { data, error in
-            if let error = error {
-                print("Image not available.")
+            if let _ = error {
+                print("Profile image not available.")
             } else {
-                print("Cell image downloaded")
+                print("Profile image downloaded")
                 let image = UIImage(data: data!)
                 images[name] = image
                 

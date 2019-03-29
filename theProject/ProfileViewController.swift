@@ -10,12 +10,12 @@ import UIKit
 import Firebase
 
 class ProfileViewController: UIViewController, UIGestureRecognizerDelegate {
+    
+    let userReference = Database.database().reference().child("users").child(Auth.auth().currentUser!.uid)
 
     @IBOutlet weak var profileImage: UIImageView!
-    
     @IBOutlet weak var displayName: UILabel!
     @IBOutlet weak var username: UILabel!
-    
     @IBOutlet weak var editDisplayNameOutlet: UIButton!
     @IBOutlet weak var logoutOutlet: UIButton!
     
@@ -27,7 +27,7 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate {
         logoutOutlet.roundButton()
         profileImage.maskCircle(anyImage: UIImage(named: "defaultProfileImage.jpg")!)
         
-        Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+        userReference.observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             
             self.displayName.text = value!["displayName"] as? String
@@ -57,6 +57,30 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func editDisplayName(_ sender: Any) {
+        
+        let currentName = self.displayName.text
+        
+        let alert = UIAlertController(title: "Hey \(currentName!)", message: "Enter a new display name", preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.placeholder = currentName
+        }
+        
+        // 3. Grab the value from the text field, and print it when the user clicks OK.
+        alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { [weak alert] (_) in
+            return
+        }))
+        alert.addAction(UIAlertAction(title: "Done", style: .default, handler: { [weak alert] (_) in
+            let enteredText = alert!.textFields![0].text!
+            
+            if enteredText.count > 0 {
+                self.userReference.child("displayName").setValue(enteredText)
+                self.displayName.text = enteredText
+            } else {
+                self.displayName.text = currentName
+            }
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func logout(_ sender: Any) {

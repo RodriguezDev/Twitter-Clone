@@ -65,7 +65,7 @@ class PostListViewController: UIViewController, UITableViewDelegate, UITableView
         cell.postText.numberOfLines = 0
         cell.postText.text = posts[indexPath.row].text
         cell.postDate.text = "| " + posts[indexPath.row].dateFormat()
-        cell.likeButton.setTitle(String(posts[indexPath.row].likes) + " likes", for: .normal)
+        cell.likeCount.text = String(posts[indexPath.row].likes)
         
         cell.postUserImage.maskCircle(anyImage: UIImage(named: "defaultProfileImage.jpg")!)
         
@@ -74,7 +74,7 @@ class PostListViewController: UIViewController, UITableViewDelegate, UITableView
         if let image = images[profileImageName] {
             cell.postUserImage.image = image
         } else {
-            // Removed download to save on bandwidth. 
+            // Removed download to save on bandwidth.
             //cell.downloadProfileImage(name: "\(cell.post.creatorUserID).jpg")
         }
         
