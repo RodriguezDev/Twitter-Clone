@@ -2,6 +2,7 @@ import UIKit
 import Firebase
 
 let NUM_OF_POSTS: UInt = 25
+var images = [String: UIImage]()
 
 class PostListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -13,6 +14,7 @@ class PostListViewController: UIViewController, UITableViewDelegate, UITableView
     
     // MARK: Database variables
     var posts = [Post]()
+    
     let postsRef = Database.database().reference().child("Posts")
     
     // MARK: Default functions
@@ -35,7 +37,7 @@ class PostListViewController: UIViewController, UITableViewDelegate, UITableView
     
     @objc func refresh(_ sender: Any) {
         getPostsAndRefresh()
-        self.refreshControl.endRefreshing() // Works??
+        self.refreshControl.endRefreshing()
     }
     
     // MARK: Table view functions.
@@ -48,7 +50,7 @@ class PostListViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: PostListCell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostListCell
         
-        // Get username & display name
+        // Get username & display name dynamically
         Database.database().reference().child("users").child(posts[indexPath.row].creatorUserID).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             
@@ -58,11 +60,23 @@ class PostListViewController: UIViewController, UITableViewDelegate, UITableView
             print(error.localizedDescription)
         }
         
+        cell.post = posts[indexPath.row]
+        
         cell.postText.numberOfLines = 0
         cell.postText.text = posts[indexPath.row].text
-        cell.postUserImage.maskCircle(anyImage: UIImage(named: "defaultProfileImage.jpg")!)
         cell.postDate.text = "| " + posts[indexPath.row].dateFormat()
-        // cell.likeButton.imageView?.contentMode = 1
+        cell.likeButton.setTitle(String(posts[indexPath.row].likes) + " likes", for: .normal)
+        
+        cell.postUserImage.maskCircle(anyImage: UIImage(named: "defaultProfileImage.jpg")!)
+        
+        let profileImageName = "\(cell.post.creatorUserID).jpg"
+        
+        if let image = images[profileImageName] {
+            cell.postUserImage.image = image
+        } else {
+            // Removed download to save on bandwidth. 
+            //cell.downloadProfileImage(name: "\(cell.post.creatorUserID).jpg")
+        }
         
         return cell
     }

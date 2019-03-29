@@ -10,8 +10,6 @@ import UIKit
 import Firebase
 
 class ProfileViewController: UIViewController, UIGestureRecognizerDelegate {
-    
-    let imagePicker = UIImagePickerController()
 
     @IBOutlet weak var profileImage: UIImageView!
     
@@ -42,28 +40,20 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate {
         UITapRecognizer.delegate = self
         self.profileImage.addGestureRecognizer(UITapRecognizer)
         self.profileImage.isUserInteractionEnabled = true
+        
+        if let cachedImage = images["\(Auth.auth().currentUser!.uid).jpg"] {
+            self.profileImage.image = cachedImage
+        } else {
+            downloadImage(path: "profileImages/\(Auth.auth().currentUser!.uid).jpg")
+        }
     }
     
     @objc func tappedImage(sender: UITapGestureRecognizer) {
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .photoLibrary
-        present(imagePicker, animated: true, completion: nil)
-    }
-    
-    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
-        // TODO: this.
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        ImagePickerManager().pickImage(self){ image in
+            self.uploadImagePic(img1: image)
             self.profileImage.image = image
-        } else{
-            print("Something went wrong in  image")
+            
         }
-        
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @objc func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func editDisplayName(_ sender: Any) {
@@ -82,6 +72,48 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate {
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true)
+    }
+    
+    func uploadImagePic(img1 :UIImage){
+        var data = Data()
+        data = UIImageJPEGRepresentation(img1, 0.1)!
+        // Create a reference to the file you want to upload
+        let storageRef = Storage.storage().reference()
+        let riversRef = storageRef.child("profileImages/\(Auth.auth().currentUser!.uid).jpg")
+        
+        let metaData = StorageMetadata()
+        metaData.contentType = "image/jpg"
+        
+        let uploadTask = riversRef.putData(data, metadata: metaData) { (metadata, error) in
+            guard let metadata = metadata else {
+                return  // Error
+            }
+            
+            let size = metadata.size
+            
+            riversRef.downloadURL { (url, error) in
+                guard let downloadURL = url else {
+                    return  // Error
+                }
+            }
+        }
+        
+    }
+    
+    func downloadImage(path: String) {
+        let storageRef = Storage.storage().reference()
+        let imageRef = storageRef.child(path)
+        
+        imageRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+            if let error = error {
+                print(error)
+            } else {
+                let image = UIImage(data: data!)
+                UIView.transition(with: self.profileImage, duration: 0.2, options: .transitionCrossDissolve, animations: {
+                    self.profileImage.image = image
+                }, completion: nil)
+            }
+        }
     }
     
 }
